@@ -1,0 +1,53 @@
+﻿@model AppointmentMaker.Models.ApplicationUser
+@{
+    ViewData["Title"] = "Ukloni";
+}
+
+<form method="post" asp-action="DeletePost">
+    <input asp-for="Id" hidden />
+    <div class="border p-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <h2 class="text-danger-50 pl-3">Da li ste sigurni?</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group row">
+                    <div class="col-6"><label asp-for="Name">Korisničko Ime</label></div>
+                    <div class="col-6"><label asp-for="Email"></label></div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-6">
+                        <input asp-for="Name" disabled class="form-control" />
+
+                    </div>
+                    <div class="col-6">
+                        <input asp-for="Email" disabled class="form-control" />
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+            <div class="form-group row">
+                <div class="col-8 offset-2 row">
+                    <div class="col">
+                        <input type="submit" class="btn btn-danger w-75" value="Ukloni"/>
+
+                    </div>
+                    <div class="col">
+                        <a asp-action="Index" class="btn btn-primary w-75">Nazad</a>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<AppointmentMaker.Models.Post>
+@{
+    ViewData["Title"] = "Početna";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Dobrodošli na Blogner</h1>
+    <br />
+    @if (User.IsInRole("User"))
+    {
+        <button class="btn btn-primary float-right" data-toggle="modal" data-target="#postModal">Create Post</button>
+
+            <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="postModalLabel">Create Post</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="postForm" method="post" enctype="multipart/form-data" asp-action="Create" asp-controller="Post">
+                <div class="form-group">
+                    <label for="topicId">Topic</label>
+                    <input type="number" class="form-control" id="topicId" name="TopicId" placeholder="Enter the topic ID" required>
+                </div>
+              <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" name="Title" placeholder="Enter the post title" required>
+              </div>
+              <div class="form-group">
+                <label for="body">Text</label>
+                <textarea class="form-control" id="body" name="Body" rows="5" placeholder="Enter the post text" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="postImage">Image</label>
+                <input type="file" class="form-control-file" id="postImage" name="postImage" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Create</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+        
+
+    }
+    <br />
+    <br />
+    <br />
+    <div id="postsContainer"></div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            
+            $.get('@Url.Action("GetPostsPartial", "Home")', function (data) {
+                $('#postsContainer').html(data);
+            });
+        });
+    </script>
+}
+</div>

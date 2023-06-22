@@ -1,0 +1,43 @@
+﻿@model IEnumerable<AppointmentMaker.Models.ApplicationUser>
+@{
+	ViewData["Title"] = "Manage Users";
+}
+<div class="container p-3">
+	<div class=" row pt-4">
+		<div class="col-6">
+			<h2 class="text-info">Uredite Informacije Korisnika</h2>
+		</div>
+	</div>
+	<br />
+
+		<table class="table table-bordered table-striped" style="width:100%">
+			<thead>
+				<tr>
+					<th>Korisničko Ime</th>
+					<th>E-Mail</th>
+					<th>Ukloni Korisnika</th>
+				</tr>
+			</thead>
+			<tbody>
+
+@foreach (var user in Model)
+{
+	<tr>
+		<td width="35%">@user.Name</td>
+		<td width="35%">@user.Email</td>
+		<td width="30%">
+			<div class="w-100 btn-group" role="group">
+				<a asp-controller="UserManagment" asp-action="Update" asp-route-Id="@user.Id" class="btn btn-primary mx-1">Uredi</a>
+				<a asp-controller="UserManagment" asp-action="Delete" asp-route-Id="@user.Id" class="btn btn-danger mx-1">Ukloni</a>
+                       
+			</div>
+		</td>
+	</tr>
+	}
+
+			</tbody>
+		</table>
+	
+
+</div>
+
